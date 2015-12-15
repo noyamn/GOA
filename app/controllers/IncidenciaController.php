@@ -165,5 +165,28 @@ class IncidenciaController extends BaseController {
         }
         
         return Redirect::to('panel_administrador');
-    }                 
+    }
+    
+    public function getImprimirconsulta($codigos)
+    {
+        $incidencias = array();
+        
+        $contador = 0;
+        
+        foreach(explode("-", $codigos) as $codigo)
+        {
+            $incidencia = Incidencia::where('codigo', '=', $codigo)->
+                                      where('id_operador','=',Auth::User()->id_usuario)->
+                                      first();
+            
+            if($incidencia != null)
+            {
+                $incidencias[$contador] = $incidencia;
+                
+                $contador++;
+            }                              
+        }
+        
+        ImpresionService::imprimeListadoIncidencias($incidencias);
+    }                       
 }

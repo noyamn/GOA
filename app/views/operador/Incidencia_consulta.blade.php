@@ -28,7 +28,7 @@
           <i class="fa fa-table"></i>
           <span> Excel</span>
           </button>	  		  
-          <button class="btn btn-primary" onclick="$('#listado-historico').tableExport({type:'excel',escape:'false',tableName:'excel.xls'});">
+          <button class="btn btn-primary" id="imprimir">
           <i class="fa fa-print"></i>
           <span> Imprimir</span>
           </button>			  
@@ -147,5 +147,9 @@
 @section('javascript') 
 $('#consulta-incidencias').dataTable(); 
 $('#fecha-recibido').daterangepicker({format: 'DD-MM-YYYY'});
-$('#fecha-cierre').daterangepicker({format: 'DD-MM-YYYY'}); 
+$('#fecha-cierre').daterangepicker({format: 'DD-MM-YYYY'});
+ $('#imprimir').click( function() {
+  var table = $('#consulta-incidencias').tableToJSON();
+  window.open('{{url()}}/panel_administrador/incidencias/imprimirconsulta/' + concatenaCodListados(table,'Nro'), '_blank')
+}); 
 @stop    

@@ -87,4 +87,19 @@ function procesaBoxAgente(agente)
     $('#boxAgente').modal('show');
 }
 
+function concatenaCodListados(json, key)
+{
+    var strCodigos = '';
+    
+    $.each(json, function(e, fila)
+    {  
+        if(key != fila[key])       
+        {
+            strCodigos += strCodigos == '' ? fila[key] : '-' + fila[key] ; 
+        }
+    });
+    
+    return strCodigos;
+}
+
 

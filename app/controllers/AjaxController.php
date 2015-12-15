@@ -125,5 +125,5 @@ class AjaxController extends BaseController {
         $agente->localidad->provincia;                                                
         
         return $agente->toJson();                    
-    }            
+    }               
 }

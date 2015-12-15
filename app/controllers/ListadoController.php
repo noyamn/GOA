@@ -74,5 +74,26 @@ class ListadoController extends BaseController {
         $provincias = Provincia::All()->Lists('descripcion', 'id'); 
         
         return $this->layout->content= View::make('operador.Listado_agentes', compact('agentes','provincias'));       
+    }
+    
+    public function getImprimiragentes($codigos)
+    {
+        $agentes = array();
+        
+        $contador = 0;
+        
+        foreach(explode("-", $codigos) as $codigo)
+        {
+            $agente = Agente::where('codigo', '=', $codigo)->first();
+            
+            if($agente != null)
+            {
+                $agentes[$contador] = $agente;
+                
+                $contador++;
+            }                              
+        }
+        
+        ImpresionService::imprimeListadoAgente($agentes);
     }    
 }

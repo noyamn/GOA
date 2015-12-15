@@ -48,7 +48,9 @@
 	<!-- Funciones JavaScript del Sistema-->
     {{ HTML::script('dist/js/Funciones.js') }}
 	<!-- Funciones AJAX del Sistema-->
-    {{ HTML::script('dist/js/Ajax.js') }}    
+    {{ HTML::script('dist/js/Ajax.js') }} 
+	<!-- Table to JSON-->
+    {{ HTML::script('plugins/tablejson/jquery.tabletojson.min.js') }}       
         
   </head>
   <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->

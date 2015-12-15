@@ -28,7 +28,7 @@
           <i class="fa fa-table"></i>
           <span> Excel</span>
           </button>	  		  
-          <button class="btn btn-primary" onclick="$('#listado-historico').tableExport({type:'excel',escape:'false',tableName:'excel.xls'});">
+          <button class="btn btn-primary" id="imprimir">
           <i class="fa fa-print"></i>
           <span> Imprimir</span>
           </button>			  
@@ -61,7 +61,7 @@
       </div>
       {{ Form::close() }}
       <div class="col-md-12">
-        <table id="listado-historico" class="table table-striped">
+        <table id="listado-agentes" class="table table-striped">
           <thead>
             <tr>
               <th>Codigo</th>
@@ -136,7 +136,11 @@
 @stop
 
 @section('javascript') 
-$('#listado-historico').dataTable(); 
+$('#listado-agentes').dataTable(); 
 $('#fecha-recibido').daterangepicker({format: 'DD-MM-YYYY'});
-$('#fecha-cierre').daterangepicker({format: 'DD-MM-YYYY'}); 
+$('#fecha-cierre').daterangepicker({format: 'DD-MM-YYYY'});
+ $('#imprimir').click( function() {
+  var table = $('#listado-agentes').tableToJSON();
+  window.open('{{url()}}/panel_administrador/listados/imprimiragentes/' + concatenaCodListados(table,'Codigo'), '_blank')
+}); 
 @stop    

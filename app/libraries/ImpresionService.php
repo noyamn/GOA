@@ -140,6 +140,104 @@ class ImpresionService
         
         exit;        
     }
+    
+    public static function imprimeListadoAgente($agentes)
+    {
+        Fpdf::AddPage();
+        
+        Fpdf::Image(App::make('url')->to('/dist/img/wu-header.gif'), 10, 5, 190, 25);
+    
+        Fpdf::Ln(25);
+
+        $cabecera = array('COD',html_entity_decode('RAZÓN SOCIAL'),html_entity_decode('NOMBRE FANTASIA'),'DOMICILIO', 'PROVINCIA', 'LOCALIDAD', 'ESTADO');
+
+        Fpdf::SetFont('Arial','',12);
+        Fpdf::Cell(190,8,'Listado de Agentes',1,0,'C');
+        Fpdf::Ln(13);
+        // Anchuras de las columnas
+        $w = array(10, 35, 35, 30, 30, 30, 20);
+        // Cabeceras
+        Fpdf::SetFont('Arial','',7);
+        for($j=0;$j<count($cabecera);$j++)
+        {
+            Fpdf::Cell($w[$j],8,$cabecera[$j],1,0,'C');
+        }
+        Fpdf::Ln();
+        // Datos
+        Fpdf::SetFont('Arial','',7);
+        foreach($agentes as $agente)
+        {       
+            Fpdf::Cell($w[0],8,$agente->codigo,1,'',"C");
+            Fpdf::Cell($w[1],8,$agente->razon_social,1,'',"C");
+            Fpdf::Cell($w[2],8,$agente->nombre_fantasia,1,0,'C');
+            Fpdf::Cell($w[3],8,$agente->domicilio,1,0,'C');
+            Fpdf::Cell($w[4],8,$agente->localidad->provincia->descripcion,1,0,'C');
+            Fpdf::Cell($w[5],8,$agente->localidad->descripcion,1,0,'C');
+            if($agente->estado_logico == 1)
+            {
+               Fpdf::Cell($w[6],8,'Habilitado', 1,0,'C'); 
+            }
+            else
+            {
+                Fpdf::Cell($w[6],8,'Deshabilitado',1,0,'C');
+            }
+            Fpdf::Ln();
+        }
+
+        Fpdf::Output('test','I');
+    }
+    
+    public static function imprimeListadoIncidencias($incidencias)
+    {
+        Fpdf::AddPage();
+        
+        Fpdf::Image(App::make('url')->to('/dist/img/wu-header.gif'), 10, 5, 190, 25);
+    
+        Fpdf::Ln(25);
+
+        $cabecera = array('NRO','TIPO',html_entity_decode('DESCRIPCIÓN'),'AGENTE', 'MTCN', 'FECHA RECIBIDO', 'FECHA CIERRE');
+
+        Fpdf::SetFont('Arial','',12);
+        Fpdf::Cell(190,8,'Consulta de Incidencias - '.Auth::User()->operador->nombre_apellido ,1,0,'C');
+        Fpdf::Ln(13);
+        // Anchuras de las columnas
+        $w = array(10, 20, 45, 40, 25, 25, 25);
+        // Cabeceras
+        Fpdf::SetFont('Arial','',7);
+        for($j=0;$j<count($cabecera);$j++)
+        {
+            Fpdf::Cell($w[$j],8,$cabecera[$j],1,0,'C');
+        }
+        Fpdf::Ln();
+        // Datos
+        Fpdf::SetFont('Arial','',7);
+        foreach($incidencias as $incidencia)
+        {       
+            Fpdf::Cell($w[0],8,$incidencia->codigo,1,'',"L");
+            Fpdf::Cell($w[1],8,$incidencia->apertura->incidente->tipoIncidente->descripcion,1,'',"L");
+            $current_y = Fpdf::GetY();
+            $current_x = Fpdf::GetX();
+            $descripcion = $incidencia->apertura->incidente->descripcion.' -'.$incidencia->apertura->descripcion;
+            if (strlen($descripcion) > 35)
+                Fpdf::MultiCell($w[2],4,html_entity_decode($descripcion),1,'L');
+            else
+                Fpdf::MultiCell($w[2],8,html_entity_decode($descripcion),1,'L');
+            Fpdf::SetXY($current_x + 45, $current_y);
+            $current_y = Fpdf::GetY();
+            $current_x = Fpdf::GetX();
+            if (strlen($incidencia->agente->nombre_fantasia) > 30)
+                Fpdf::MultiCell($w[3],4,html_entity_decode($incidencia->agente->nombre_fantasia),1,'L');
+            else
+                Fpdf::MultiCell($w[3],8,html_entity_decode($incidencia->agente->nombre_fantasia),1,'L');
+            Fpdf::SetXY($current_x + 40, $current_y);
+            Fpdf::Cell($w[4],8,$incidencia->mtcn,1,0,'L');
+            Fpdf::Cell($w[5],8,$incidencia->fecha_alta,1,0,'L');
+            Fpdf::Cell($w[6],8,$incidencia->fecha_cierre,1,0,'L');
+            Fpdf::Ln();
+        }
+
+        Fpdf::Output();
+    }
 }
 
 ?>
