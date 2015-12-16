@@ -15,4 +15,10 @@ class Agente extends Eloquent
     {
         return $this->hasMany('UsuarioAgente', 'id_agente', 'id');
     }
+    
+    public function usuario()
+    {
+        return Usuario::where('id_usuario', '=', $this->id)->
+                        where('id_tipo','=',1)->first();
+    }    
 }

@@ -41,6 +41,8 @@ class AbmAgenteController extends BaseController {
             'razon_social' => 'required',
             'nombre_fantasia' => 'required',
             'domicilio' => 'required',
+            'password' => 'required',
+            'repassword' => 'required'
         ));
         
         if(!$validacion->fails())
@@ -60,6 +62,18 @@ class AbmAgenteController extends BaseController {
             $agente->id_localidad = $input['localidad'];
             
             $agente->save();
+            
+            $usuario = new Usuario();
+            
+            $usuario->id_usuario = $agente->id;
+            
+            $usuario->email = $input['email'];
+            
+            $usuario->password = $input['password'];
+            
+            $usuario->id_tipo = 1;
+            
+            $usuario->save();
             
              return Redirect::to('panel_administrador/abm_agente');
         }
@@ -125,7 +139,18 @@ class AbmAgenteController extends BaseController {
                 
                 $agente->id_localidad = $input['localidad'];
                 
-                $agente->save();
+                $agente->save();                
+                
+                $usuario = $agente->usuario();
+                
+                $usuario->email = $input['email'];
+                
+                if($input['password'] != '' && $input['password'] == $input['repassword'])
+                {
+                    $usuario->password = $input['password'];                   
+                }   
+                                                     
+                $usuario->save();                
                 
                  return Redirect::to('panel_administrador/abm_agente');
             }
@@ -149,6 +174,8 @@ class AbmAgenteController extends BaseController {
             if($agente != null)
             {
                 $agente->delete();
+                
+                $agente->usuario()->delete();
             }
         }
         

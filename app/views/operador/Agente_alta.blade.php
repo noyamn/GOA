@@ -34,7 +34,6 @@
       <div class="col-md-12">
          <div class="col-md-4">
             <div class="form-group">
-               <label>Estado:</label>
                {{ Form::label('estado', 'Estado:') }}
                {{ Form::select('estado', $estados, null, array('class' => 'form-control')) }}
             </div>
@@ -66,6 +65,27 @@
             </div>
          </div>
       </div>
+      <div class="col-md-12">
+        <div class="form-group box-header with-border">
+            <h3 class="box-title">Datos de Acceso</h3>
+         </div>      
+         <div class="col-md-4">
+            <div class="form-group @if($errors->first('codigo') != '') {{'has-error'}} @endif">
+               {{ Form::label('email', 'Email:') }}
+               {{ Form::text('email', null, array('class' => 'form-control', 'placeholder' => $errors->first('codigo'))) }}
+            </div>
+            <div class="form-group @if($errors->first('codigo') != '') {{'has-error'}} @endif">
+               {{ Form::label('password', 'Password:') }}
+               <input type="password" name="password" id="password"  class="form-control" placeholder="{{ $errors->first('password') }}"/>
+            </div>
+            <div class="form-group @if($errors->first('codigo') != '') {{'has-error'}} @endif">
+               {{ Form::label('repassword', 'Re-Password:') }}
+               <input type="password" name="repassword" id="repassword"  class="form-control" placeholder="{{ $errors->first('repassword') }}"/>
+            </div>                        
+         </div>
+         <div class="form-group col-md-5">
+         </div>
+      </div>        
       {{ Form::close() }}
    </div>
    <!-- /.box-body -->
