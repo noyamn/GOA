@@ -3,11 +3,11 @@
 @section('header')
 <section class="content-header">
     <h1>
-      Reclamos
+      @if($tipoIncidente=='reclamo') Reclamos @else Consultas @endif
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Reclamos</li>
+      <li class="active">@if($tipoIncidente=='reclamo') Reclamos @else Consultas @endif</li>
     </ol>
 </section>
 @stop
@@ -16,13 +16,13 @@
 
 <div class="box box-default">
    <div class="box-header with-border">
-      <h1 class="box-title">Reclamo enviado exitosamente</h1>
+      <h1 class="box-title">@if($tipoIncidente=='reclamo') Reclamo enviado exitosamente @else Consulta enviada exitosamente @endif</h1>
    </div>
    <div class="box-body">
       <div class="row">
          <div class="col-md-10 col-md-offset-1" style="background-image:url('../../dist/img/tilde.jpg')">
             <p class="lead" style="margin-top:20px">
-               Su reclamo ha sido enviado exitosamente.
+               @if($tipoIncidente=='reclamo') Su reclamo ha sido enviado exitosamente. @else Su consulta ha sido enviada exitosamente. @endif
             </p>
             <div class="form-group col-md-6">
                <strong>N&ordm; de incidente:</strong>

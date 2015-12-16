@@ -3,11 +3,11 @@
 @section('header')
 <section class="content-header">
     <h1>
-      Reclamos
+      @if($tipoIncidente=='reclamo') Reclamos @else Consultas @endif
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Reclamos</li>
+      <li class="active">@if($tipoIncidente=='reclamo') Reclamos @else Consultas @endif</li>
     </ol>
 </section>
 @stop
@@ -16,7 +16,7 @@
 
 <div class="box box-default">
    <div class="box-header with-border">
-      <h1 class="box-title">Ingrese los datos de reclamo</h1>
+      <h1 class="box-title">@if($tipoIncidente=='reclamo') Ingrese los datos de reclamo @else Ingrese los datos de la consulta @endif</h1>
    </div>
    <div class="box-body">
       <div class="row">
@@ -34,7 +34,7 @@
             <input type="hidden" name="Funcion" value="generaIncidencia" /> 
             <div class="col-md-10 col-md-offset-1">
                <p class="lead" style="margin-top:20px">
-                  Datos de Reclamo:
+                  @if($tipoIncidente=='reclamo') Datos de Reclamo: @else Datos de Consulta: @endif
                </p>
             </div>
             <div class="col-md-10 col-md-offset-1">
@@ -74,7 +74,7 @@
                </div>
                <div class="col-md-3 pull-right">
                   <button class="btn btn-block btn-warning" style="margin-top:15px;" >
-                  Realizar Reclamo
+                  Realizar @if($tipoIncidente=='reclamo') Reclamo @else Consulta @endif
                   </button>							
                </div>
             </div>

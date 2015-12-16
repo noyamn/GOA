@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <p style="color:#777">
-			En esta seccion usted puede consultar el estado de sus reclamos, operador que atendio el mismo, y la respuesta a su Incidencia. 
+			En esta seccion usted puede consultar el estado de sus incidencias, operador que atendio el mismo, y la respuesta a su Incidencia. 
         </p>
       </div>
     </div>

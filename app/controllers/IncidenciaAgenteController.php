@@ -19,7 +19,7 @@ class IncidenciaAgenteController extends BaseController {
            
     	   $incidentes = Incidente::Where('id_tipo', '=', $idTipoIncidente)->Lists('descripcion','id');
            
-           return $this->layout->content = View::make('agente.Incidencia_inicia', compact('incidentes'));
+           return $this->layout->content = View::make('agente.Incidencia_inicia', compact('incidentes','tipoIncidente'));
        }
        else
        {
@@ -29,13 +29,15 @@ class IncidenciaAgenteController extends BaseController {
     
     public function postProcesa()
     {
-        $input = Input::All();
+        $input = Input::All();    
         
         $aperturas = Apertura::Where('id_incidente','=', $input['incidente'])->Lists('descripcion','id');
         
+        $tipoIncidente = Incidente::find($input['incidente'])->id_tipo == 1 ? 'reclamo' : 'consulta';
+        
         $usuarios = UsuarioAgente::Where('id_agente', '=', Auth::User()->id_usuario)->get()->Lists('nombre_apellido','id');
         
-        return $this->layout->content = View::make('agente.Incidencia_procesa', compact('aperturas', 'usuarios'));
+        return $this->layout->content = View::make('agente.Incidencia_procesa', compact('aperturas', 'usuarios','tipoIncidente'));
     }
     
     public function postEnvia() 
@@ -47,7 +49,6 @@ class IncidenciaAgenteController extends BaseController {
             'apertura' => 'required',            
             'mtcn' => 'required',
             'monto' => 'required',
-            'usuario_agente' => 'required',
             'beneficiario' => 'required',
             'destino' => 'required',
         ));
@@ -84,9 +85,11 @@ class IncidenciaAgenteController extends BaseController {
             
             $incidencia->save();
             
+            $tipoIncidente = $incidencia->apertura->incidente->id_tipo == 1 ? 'reclamo' : 'consulta';
+            
             NotificacionService::incidenciaRegistra($incidencia);
             
-            return $this->layout->content = View::make('agente.Incidencia_envia', compact('incidencia'));
+            return $this->layout->content = View::make('agente.Incidencia_envia', compact('incidencia', 'tipoIncidente'));
         }
         else
         {

@@ -3,11 +3,11 @@
 @section('header')
 <section class="content-header">
     <h1>
-      Reclamos
+      @if($tipoIncidente=='reclamo') Reclamos @else Consultas @endif
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Reclamos</li>
+      <li class="active">@if($tipoIncidente=='reclamo') Reclamos @else Consultas @endif</li>
     </ol>
 </section>
 @stop
@@ -16,21 +16,21 @@
 
 <div class="box box-default">
   <div class="box-header with-border">
-    <h1 class="box-title">Iniciando un reclamo</h1>
+    <h1 class="box-title">@if($tipoIncidente=='reclamo') Iniciando un reclamo @else Iniciando una consulta @endif </h1>
   </div>
   <div class="box-body">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <p style="color:#777">
-            En esta secci&oacute;n usted puede iniciar un reclamo pertinente. Seleccione el reclamo correspondiente e ingrese los datos para llevar a cabo el mismo.
-            Cuando el reclamo est&eacute; siendo procesado, usted ser&aacute; notificado.
+            En esta secci&oacute;n usted puede iniciar una incidencia pertinente. Seleccione el incidente correspondiente e ingrese los datos para llevar a cabo el mismo.
+            Cuando la incidencia est&eacute; siendo procesada, usted ser&aacute; notificado.
         </p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <p class="lead" style="margin-top:20px">
-          Seleccione un reclamo:
+          @if($tipoIncidente=='reclamo') Seleccione un reclamo: @else Seleccione una consulta: @endif
         </p>
         <div class="col-md-8">           
             
@@ -43,7 +43,7 @@
           <div class="row">
             <div class="col-md-4 pull-right">
               <button class="btn btn-block btn-warning" style="margin-top:15px;" onclick="$('#form').submit()">
-              Iniciar Reclamo
+              Iniciar Incidencia
               </button>
             </div>
           </div>
