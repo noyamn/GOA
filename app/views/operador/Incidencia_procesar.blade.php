@@ -24,19 +24,15 @@
           <button type="submit" class="btn btn-primary" formaction="../cerrar">
           <i class="glyphicon glyphicon-check"></i>
           <span> Cerrar Incidencia</span>
-          </button>	
-          <button class="btn btn-primary" onclick="javascript:cargarPantalla('operador/inbox-incidencias.php')" disabled>
-          <i class="fa fa-save"></i>
-          <span> Guardar</span>
-          </button>			  
-          <button class="btn btn-primary" onclick="javascript:cargarPantalla('operador/inbox-incidencias.php')">
-          <i class="fa fa-list-alt"></i>
-          <span> Modificar</span>
-          </button>			  		  
-          <button class="btn btn-primary" onclick=" window.open('{{url()}}/panel_administrador/incidencias/imprimir/{{ $incidencia->codigo }}','_blank')">
+          </button>				  
+          <a class="btn btn-primary" href="{{url('panel_administrador/incidencias/desvincular/'.$incidencia->codigo)}}">
+          <i class="fa fa-remove"></i>
+          <span> Desvincular</span>
+          </a>			  		  
+          <a class="btn btn-primary" onclick=" window.open('{{url()}}/panel_administrador/incidencias/imprimir/{{ $incidencia->codigo }}','_blank')">
           <i class="fa fa-print"></i>
           <span> Imprimir</span>
-          </button>			  
+          </a>			  
         </div>
       </div>
     </div>

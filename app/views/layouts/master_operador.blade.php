@@ -231,7 +231,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="{{ url('panel_administrador/abm_incidentes') }}">
+              <a href="{{ url('panel_administrador/abm_incidente') }}">
               <i class="fa fa-edit"></i>
               <span>ABM de Incidentes</span>
               </a>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2015 a las 20:27:40
+-- Tiempo de generación: 16-12-2015 a las 21:35:38
 -- Versión del servidor: 5.6.26
 -- Versión de PHP: 5.6.12
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `agente` (
   `codigo_postal` varchar(4) DEFAULT NULL,
   `id_localidad` int(5) DEFAULT NULL,
   `estado_logico` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `agente`
@@ -219,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `notificacion` (
   `isVista` tinyint(1) DEFAULT NULL,
   `texto` varchar(250) DEFAULT NULL,
   `id_formato` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `notificacion`
@@ -231,17 +231,21 @@ INSERT INTO `notificacion` (`id`, `fecha_alta`, `id_usuario`, `id_operador`, `is
 (3, '2015-12-16 15:29:55', 2, NULL, 1, 1, 'Su incidencia con Nro: 9, a cambiado a estado En Proceso.', 1),
 (4, '2015-12-16 15:30:43', 2, NULL, 1, 1, 'Su incidencia con Nro: 9, a cambiado a estado Cerrado.', 1),
 (5, '2015-12-16 15:35:40', NULL, 1, 1, 0, 'Se ha registrado una nueva incidencia con Nro: 10.', 2),
-(6, '2015-12-16 15:35:40', NULL, 2, 1, 0, 'Se ha registrado una nueva incidencia con Nro: 10.', 2),
+(6, '2015-12-16 15:35:40', NULL, 2, 1, 1, 'Se ha registrado una nueva incidencia con Nro: 10.', 2),
 (7, '2015-12-16 16:07:23', NULL, 1, 1, 0, 'Se ha registrado una nueva incidencia con Nro: 11.', 2),
-(8, '2015-12-16 16:07:23', NULL, 2, 0, 0, 'Se ha registrado una nueva incidencia con Nro: 11.', 2),
+(8, '2015-12-16 16:07:23', NULL, 2, 1, 1, 'Se ha registrado una nueva incidencia con Nro: 11.', 2),
 (9, '2015-12-16 16:07:39', 2, NULL, 1, 0, 'Su incidencia con Nro: 11, a cambiado a estado En Proceso.', 1),
 (10, '2015-12-16 16:07:57', 2, NULL, 1, 0, 'Su incidencia con Nro: 11, a cambiado a estado Cerrado.', 1),
 (11, '2015-12-16 16:21:06', NULL, 1, 1, 0, 'Se ha registrado una nueva incidencia con Nro: 12.', 2),
-(12, '2015-12-16 16:21:06', NULL, 2, 0, 0, 'Se ha registrado una nueva incidencia con Nro: 12.', 2),
-(13, '2015-12-16 16:21:28', 1, NULL, 1, 0, 'Su incidencia con Nro: 3, a cambiado a estado En Proceso.', 1),
-(14, '2015-12-16 16:21:33', 1, NULL, 1, 0, 'Su incidencia con Nro: 3, a cambiado a estado Cerrado.', 1),
-(15, '2015-12-16 16:25:13', 1, NULL, 1, 0, 'Su incidencia con Nro: 12, a cambiado a estado En Proceso.', 1),
-(16, '2015-12-16 16:25:18', 1, NULL, 1, 0, 'Su incidencia con Nro: 12, a cambiado a estado Cerrado.', 1);
+(12, '2015-12-16 16:21:06', NULL, 2, 1, 1, 'Se ha registrado una nueva incidencia con Nro: 12.', 2),
+(13, '2015-12-16 16:21:28', 1, NULL, 1, 1, 'Su incidencia con Nro: 3, a cambiado a estado En Proceso.', 1),
+(14, '2015-12-16 16:21:33', 1, NULL, 1, 1, 'Su incidencia con Nro: 3, a cambiado a estado Cerrado.', 1),
+(15, '2015-12-16 16:25:13', 1, NULL, 1, 1, 'Su incidencia con Nro: 12, a cambiado a estado En Proceso.', 1),
+(16, '2015-12-16 16:25:18', 1, NULL, 1, 1, 'Su incidencia con Nro: 12, a cambiado a estado Cerrado.', 1),
+(17, '2015-12-16 16:33:33', 1, NULL, 1, 1, 'Su incidencia con Nro: 4, a cambiado a estado En Proceso.', 1),
+(18, '2015-12-16 16:33:50', 1, NULL, 1, 1, 'Su incidencia con Nro: 4, a cambiado a estado En Proceso.', 1),
+(19, '2015-12-16 17:33:11', 1, NULL, 0, 0, 'Su incidencia con Nro: 2, a cambiado a estado En Proceso.', 1),
+(20, '2015-12-16 17:33:42', 1, NULL, 0, 0, 'Su incidencia con Nro: 2, a cambiado a estado En Proceso.', 1);
 
 -- --------------------------------------------------------
 
@@ -320,18 +324,18 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `remember_token` varchar(200) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `id_usuario`, `email`, `password`, `id_tipo`, `remember_token`, `updated_at`, `created_at`) VALUES
-(1, 1, 'agente@wugoa.com.ar', 'agente1234', 1, 'iPe27SyPig0OOJDWq1AVLUfqaCq97Tq7T4ryrecj5NGlZBt07i3QpcWO3OOB', '2015-12-16 19:06:08', NULL),
+(1, 1, 'agente@wugoa.com.ar', 'agente1234', 1, 'f5Y12OZ0CYJSvxArDnPhhFiiJys6Im3F93mtH18AQIyyFY4hyGkM3hRhTLh2', '2015-12-16 20:32:59', NULL),
 (2, 2, 'operador@wugoa.com.ar', 'operador1234', 2, 'YlxkGO0V8xoW5HlBDEGGkE78AfPe3ziIm6yWkbwGwyKkESx1STsdBVcOZd4C', '2015-12-16 18:44:16', NULL),
 (3, 2, 'agente1@wugoa.com.ar', 'agente1234', 1, 'M1rHvbq5HlItDw9zj9fugFmF8brevlCtnvcpZbJMKiMysdsPmR5T8EpzmTj5', '2015-12-16 19:19:56', NULL),
 (8, 3, 'agente3@wunion.com.ar', 'agente1234', 1, NULL, NULL, NULL),
-(9, 1, 'operador1@wugoa.com.ar', 'operador1234', 2, 'ACadsngXv2s5b3VNlAomSjzYe2HfwakLxtpECjadf3WDqdTul6TycAwTNHQT', '2015-12-16 17:56:06', NULL);
+(9, 1, 'operador1@wugoa.com.ar', 'operador1234', 2, 'UsiONhWmWjRR5fJyrleHtGxTIEpyoltL5sapB4SPOXwHwRvYjCF4zaxVu5Y6', '2015-12-16 19:29:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -445,7 +449,7 @@ ALTER TABLE `usuario_agente`
 -- AUTO_INCREMENT de la tabla `agente`
 --
 ALTER TABLE `agente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `apertura`
 --
@@ -480,7 +484,7 @@ ALTER TABLE `localidad`
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `operador`
 --
@@ -500,7 +504,7 @@ ALTER TABLE `tipo_incidente`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `usuario_agente`
 --

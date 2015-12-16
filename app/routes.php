@@ -25,6 +25,8 @@ Route::group(array('before' => 'auth'), function()
         
         Route::controller('panel_administrador/abm_apertura', 'AbmAperturaController');
         
+        Route::controller('panel_administrador/abm_incidente', 'AbmIncidenteController');
+        
         Route::controller('panel_administrador/datos_operador', 'DatosOperadorController');
         
         Route::controller('panel_administrador/incidencias', 'IncidenciaController');
