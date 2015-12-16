@@ -132,7 +132,9 @@ class IncidenciaController extends BaseController {
     
     public function getConsulta()
     {
-        $incidencias = Incidencia::Where('id_estado', '=', 3)->get();
+        $incidencias = Incidencia::Where('id_estado', '=', 3)->
+                                   Where('id_operador', '=', Auth::User()->id_usuario)->
+                                   get();
         
         return $this->layout->content= View::make('operador.Incidencia_consulta', compact('incidencias'));
     }
@@ -142,6 +144,7 @@ class IncidenciaController extends BaseController {
         $input = Input::All();
         
         $incidencias = Incidencia::Where('id_estado', '=', 3)->
+                                   Where('id_operador', '=', Auth::User()->id_usuario)->
                                    Where('codigo', 'like', $input['nro_incidencia'].'%')->
                                    WhereHas('agente', function($agente) use($input)
                                    {

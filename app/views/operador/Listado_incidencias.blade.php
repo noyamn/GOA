@@ -24,11 +24,11 @@
           <i class="glyphicon glyphicon-search"></i>
           <span> Buscar</span>
           </button>		  
-          <button class="btn btn-primary" id="exportExcel">
+          <a class="btn btn-primary" id="excel">
           <i class="fa fa-table"></i>
           <span> Excel</span>
-          </button>	  		  
-          <button class="btn btn-primary" onclick="$('#listado-historico').tableExport({type:'excel',escape:'false',tableName:'excel.xls'});">
+          </a>	  		  
+          <button class="btn btn-primary" id="imprimir">
           <i class="fa fa-print"></i>
           <span> Imprimir</span>
           </button>			  
@@ -81,7 +81,7 @@
               <th>Operador</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="body">
           
                 @foreach ($incidencias as $incidencia)
                 <tr>
@@ -146,5 +146,14 @@
 @section('javascript') 
 $('#listado-historico').dataTable(); 
 $('#fecha-recibido').daterangepicker({format: 'DD-MM-YYYY'});
-$('#fecha-cierre').daterangepicker({format: 'DD-MM-YYYY'}); 
+$('#fecha-cierre').daterangepicker({format: 'DD-MM-YYYY'});
+ $('#imprimir').click( function() {
+  var table = $('#listado-historico').tableToJSON();
+  window.open('{{url()}}/panel_administrador/listados/imprimirhistorico/' + concatenaCodListados(table,'Nro'), '_blank')
+}); 
+
+$("#excel").on('click', function (event) {
+
+    exportTableToCSV.apply(this, [$('#body'), 'listado-incidencias.csv']);
+});
 @stop    

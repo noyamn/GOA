@@ -20,7 +20,7 @@
     <div class="row menu-botones">
       <div class="col-md-12">
         <div class="mailbox-controls">
-          <button class="btn btn-primary" onclick="javascript:cargarPantalla('operador/inbox-incidencias.php')">
+          <button class="btn btn-primary" onclick="javascript:location.reload()">
           <i class="fa fa-refresh"></i>
           <span>Actualizar</span>
           </button>							

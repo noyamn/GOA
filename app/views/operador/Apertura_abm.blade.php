@@ -48,6 +48,7 @@
               <th>Descripcion</th>
 			  <th>Incidente</th>			  
 			  <th>Activo</th>
+              <th>Accion</th>
             </tr>
           </thead>
           <tbody>
@@ -68,7 +69,17 @@
                   @else
                     <input type="checkbox"  disabled />
                   @endif    
-				  </td>			  
+				  </td>	
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="" data-toggle="tooltip" data-original-title="Modificar">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                            <span></span>
+                        </a>
+                        <a class="btn btn-primary btn-sm" href="" data-toggle="tooltip" data-original-title="Borrar">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        <span></span>
+                        </a>	                    
+                    </td>                       		  
 				</tr>
             @endforeach     
           </tbody>
@@ -77,6 +88,7 @@
               <th>Codigo</th>
               <th>Descripcion</th>
 			  <th>Activo</th>
+              <th>Accion</th>
             </tr>
           </tfoot>
         </table>

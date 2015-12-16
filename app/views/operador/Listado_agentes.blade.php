@@ -24,10 +24,10 @@
           <i class="glyphicon glyphicon-search"></i>
           <span> Buscar</span>
           </button>		  
-          <button class="btn btn-primary" id="exportExcel">
+          <a class="btn btn-primary" id="excel">
           <i class="fa fa-table"></i>
           <span> Excel</span>
-          </button>	  		  
+          </a>	  		  
           <button class="btn btn-primary" id="imprimir">
           <i class="fa fa-print"></i>
           <span> Imprimir</span>
@@ -73,7 +73,7 @@
               <th>Estado</th>              
             </tr>
           </thead>
-          <tbody>
+          <tbody id="body">
             
             @foreach ($agentes as $agente)
             <tr>
@@ -143,4 +143,8 @@ $('#fecha-cierre').daterangepicker({format: 'DD-MM-YYYY'});
   var table = $('#listado-agentes').tableToJSON();
   window.open('{{url()}}/panel_administrador/listados/imprimiragentes/' + concatenaCodListados(table,'Codigo'), '_blank')
 }); 
+$("#excel").on('click', function (event) {
+
+    exportTableToCSV.apply(this, [$('#body'), 'listado-agentes.csv']);
+});
 @stop    

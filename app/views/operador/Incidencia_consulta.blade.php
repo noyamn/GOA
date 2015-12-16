@@ -24,10 +24,10 @@
           <i class="glyphicon glyphicon-search"></i>
           <span> Buscar</span>
           </button>		  
-          <button class="btn btn-primary" id="exportExcel">
+          <a class="btn btn-primary" id="excel">
           <i class="fa fa-table"></i>
           <span> Excel</span>
-          </button>	  		  
+          </a>	  		  
           <button class="btn btn-primary" id="imprimir">
           <i class="fa fa-print"></i>
           <span> Imprimir</span>
@@ -151,5 +151,9 @@ $('#fecha-cierre').daterangepicker({format: 'DD-MM-YYYY'});
  $('#imprimir').click( function() {
   var table = $('#consulta-incidencias').tableToJSON();
   window.open('{{url()}}/panel_administrador/incidencias/imprimirconsulta/' + concatenaCodListados(table,'Nro'), '_blank')
-}); 
+});
+ $("#excel").on('click', function (event) {
+
+    exportTableToCSV.apply(this, [$('#consulta-incidencias'), 'consulta-incidencias.csv']);
+});
 @stop    

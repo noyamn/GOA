@@ -38,8 +38,8 @@ class AbmAgenteController extends BaseController {
         $validacion = Validator::make(Input::All(), array 
         (
             'codigo' => 'required|unique:agente,codigo',            
-            'razon_social' => 'required',
-            'nombre_fantasia' => 'required',
+            'razon-social' => 'required',
+            'nombre-fantasia' => 'required',
             'domicilio' => 'required',
             'password' => 'required',
             'repassword' => 'required'
@@ -53,13 +53,15 @@ class AbmAgenteController extends BaseController {
             
             $agente->codigo = $input['codigo'];
             
-            $agente->razon_social = $input['razon_social'];
+            $agente->razon_social = $input['razon-social'];
             
-            $agente->nombre_fantasia = $input['nombre_fantasia'];
+            $agente->nombre_fantasia = $input['nombre-fantasia'];
             
             $agente->domicilio = $input['domicilio'];
             
             $agente->id_localidad = $input['localidad'];
+            
+            $agente->codigo_postal = '1678';
             
             $agente->save();
             

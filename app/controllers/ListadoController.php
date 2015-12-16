@@ -95,5 +95,27 @@ class ListadoController extends BaseController {
         }
         
         ImpresionService::imprimeListadoAgente($agentes);
-    }    
+    }
+    
+    public function getImprimirhistorico($codigos)
+    {
+        $incidencias = array();
+        
+        $contador = 0;
+        
+        foreach(explode("-", $codigos) as $codigo)
+        {
+            $incidencia = Incidencia::where('codigo', '=', $codigo)->
+                                      first();
+            
+            if($incidencia != null)
+            {
+                $incidencias[$contador] = $incidencia;
+                
+                $contador++;
+            }                              
+        }
+        
+        ImpresionService::imprimeListadoHistorico($incidencias);
+    }        
 }

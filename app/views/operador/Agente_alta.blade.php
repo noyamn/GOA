@@ -39,15 +39,18 @@
             </div>
             <div class="form-group @if($errors->first('codigo') != '') {{'has-error'}} @endif">
                {{ Form::label('codigo', 'Codigo:') }}
-               {{ Form::text('codigo', null, array('class' => 'form-control', 'placeholder' => $errors->first('codigo'))) }}
+               <label id='form_codigo_error'></label>
+               {{ Form::text('codigo', null, array('class' => 'form-control', 'placeholder' => 'Codigo')) }}
             </div>
             <div class="form-group @if($errors->first('razon_social') != '') {{'has-error'}} @endif">               
-               {{ Form::label('razon_social', 'Razon Social:') }}
-               {{ Form::text('razon_social', null, array('class' => 'form-control', 'placeholder' => $errors->first('razon_social'))) }}               
+               {{ Form::label('razon-social', 'Razon Social:') }}
+               <label id='form_razon-social_error'></label>
+               {{ Form::text('razon-social', null, array('class' => 'form-control', 'placeholder' => 'Razon Social')) }}               
             </div>
             <div class="form-group @if($errors->first('nombre_fantasia') != '') {{'has-error'}} @endif">               
-               {{ Form::label('nombre_fantasia', 'Nombre Fantasia:') }}
-               {{ Form::text('nombre_fantasia', null, array('class' => 'form-control', 'placeholder' => $errors->first('nombre_fantasia'))) }}
+               {{ Form::label('nombre-fantasia', 'Nombre Fantasia:') }}
+               <label id='form_nombre-fantasia_error'></label>               
+               {{ Form::text('nombre-fantasia', null, array('class' => 'form-control', 'placeholder' => 'Nombre Fantasia')) }}
             </div>
          </div>
          <div class="form-group col-md-5">
@@ -61,7 +64,8 @@
          <div class="form-group col-md-5">
             <div class="form-group @if($errors->first('domicilio') != '') {{'has-error'}} @endif">
                {{ Form::label('domicilio', 'Domicilio:') }}
-               {{ Form::text('domicilio', null, array('class' => 'form-control', 'placeholder' => $errors->first('domicilio'))) }}
+               <label id='form_domicilio_error'></label>
+               {{ Form::text('domicilio', null, array('class' => 'form-control', 'placeholder' => 'Domicilio')) }}
             </div>
          </div>
       </div>
@@ -72,15 +76,18 @@
          <div class="col-md-4">
             <div class="form-group @if($errors->first('codigo') != '') {{'has-error'}} @endif">
                {{ Form::label('email', 'Email:') }}
-               {{ Form::text('email', null, array('class' => 'form-control', 'placeholder' => $errors->first('codigo'))) }}
+               <label id='form_email_error'></label>
+               {{ Form::text('email', null, array('class' => 'form-control', 'placeholder' => 'Email')) }}
             </div>
             <div class="form-group @if($errors->first('codigo') != '') {{'has-error'}} @endif">
                {{ Form::label('password', 'Password:') }}
-               <input type="password" name="password" id="password"  class="form-control" placeholder="{{ $errors->first('password') }}"/>
+               <label id='form_password_error'></label>
+               <input type="password" name="password" id="password"  class="form-control" placeholder="Password"/>
             </div>
             <div class="form-group @if($errors->first('codigo') != '') {{'has-error'}} @endif">
                {{ Form::label('repassword', 'Re-Password:') }}
-               <input type="password" name="repassword" id="repassword"  class="form-control" placeholder="{{ $errors->first('repassword') }}"/>
+               <label id='form_repassword_error'></label>
+               <input type="password" name="repassword" id="repassword"  class="form-control" placeholder="Re-Password"/>
             </div>                        
          </div>
          <div class="form-group col-md-5">
@@ -93,17 +100,33 @@
       Alta de Agente
    </div>
 </div>
-<script type="text/javascript">	
-   //Funciones para cuando carga el DOM
-   $( document ).ready(function() {
-   	
-   setTimeout(function()
-   {
-   	CKEDITOR.replace('txtRespuesta');
-   },100);
-   	
-   });  
-    
-</script>
+@stop
+@section('javascript')
+//Validaciones
+var validator  = new Validator("form");
 
+validator.EnableOnPageErrorDisplay();
+
+validator.EnableMsgsTogether();
+
+validator.addValidation("codigo","req");
+validator.addValidation("codigo","maxlen=10");
+
+validator.addValidation("razon-social","req");
+validator.addValidation("razon-social","maxlen=20");
+
+validator.addValidation("nombre-fantasia","req");
+validator.addValidation("nombre-fantasia","maxlen=20");
+
+validator.addValidation("domicilio","req");
+validator.addValidation("domicilio","maxlen=20");
+
+validator.addValidation("email","req");
+validator.addValidation("email","maxlen=20");
+
+validator.addValidation("password","req");
+validator.addValidation("password","maxlen=20");
+
+validator.addValidation("repassword","req");
+validator.addValidation("repassword","maxlen=20");
 @stop

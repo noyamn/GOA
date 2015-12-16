@@ -237,7 +237,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="{{ url('panel_administrador/incidencias/pendientes') }}">
+              <a href="{{ url('panel_administrador/abm_apertura') }}">
               <i class="fa fa-edit"></i>
               <span>ABM de Aperturas</span>
               </a>
@@ -249,7 +249,7 @@
               </a>
               <ul class="treeview-menu">
                 <li>
-					<a href="javascript:cargarPantalla('operador/operador-datos.php')">
+					<a href="{{url('panel_administrador/datos_operador')}}">
 					<i class="fa fa-edit"></i>Datos Operador</a>
 				</li>			  
                 <li>

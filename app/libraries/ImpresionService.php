@@ -157,7 +157,7 @@ class ImpresionService
         // Anchuras de las columnas
         $w = array(10, 35, 35, 30, 30, 30, 20);
         // Cabeceras
-        Fpdf::SetFont('Arial','',7);
+        Fpdf::SetFont('Arial','B',7);
         for($j=0;$j<count($cabecera);$j++)
         {
             Fpdf::Cell($w[$j],8,$cabecera[$j],1,0,'C');
@@ -203,7 +203,7 @@ class ImpresionService
         // Anchuras de las columnas
         $w = array(10, 20, 45, 40, 25, 25, 25);
         // Cabeceras
-        Fpdf::SetFont('Arial','',7);
+        Fpdf::SetFont('Arial','B',7);
         for($j=0;$j<count($cabecera);$j++)
         {
             Fpdf::Cell($w[$j],8,$cabecera[$j],1,0,'C');
@@ -233,6 +233,81 @@ class ImpresionService
             Fpdf::Cell($w[4],8,$incidencia->mtcn,1,0,'L');
             Fpdf::Cell($w[5],8,$incidencia->fecha_alta,1,0,'L');
             Fpdf::Cell($w[6],8,$incidencia->fecha_cierre,1,0,'L');
+            Fpdf::Ln();
+        }
+
+        Fpdf::Output();
+    }
+    
+    public static function imprimeListadoHistorico($incidencias)
+    {
+        Fpdf::AddPage();
+        
+        Fpdf::Image(App::make('url')->to('/dist/img/wu-header.gif'), 10, 5, 190, 25);
+    
+        Fpdf::Ln(25);
+
+        $cabecera = array('NRO','TIPO','AGENTE',html_entity_decode('DESCRIPCIÓN'), 'MTCN', 'BENEFICIARIO', 'DESTINO', 'MONTO', 'OPERADOR');
+
+        Fpdf::SetFont('Arial','',12);
+        Fpdf::Cell(190,8,html_entity_decode('Histórico de Incidencias'),1,0,'C');
+        Fpdf::Ln(13);
+        // Anchuras de las columnas
+        $w = array(10, 15, 30, 30, 20, 25, 25, 15, 20);
+        // Cabeceras
+        Fpdf::SetFont('Arial','B',7);
+        for($j=0;$j<count($cabecera);$j++)
+        {
+            Fpdf::Cell($w[$j],8,$cabecera[$j],1,0,'C');
+        }
+        Fpdf::Ln();
+        // Datos
+        Fpdf::SetFont('Arial','',7);
+        foreach($incidencias as $incidencia)
+        {       
+            Fpdf::Cell($w[0],8,$incidencia->codigo,1,'',"C");
+            Fpdf::Cell($w[1],8,$incidencia->apertura->incidente->tipoIncidente->descripcion,1,'',"L");
+            $current_y = Fpdf::GetY();
+            $current_x = Fpdf::GetX();
+            if (strlen($incidencia->agente->nombre_fantasia) > 30)
+                Fpdf::MultiCell($w[2],4,$incidencia->agente->nombre_fantasia,1,'L');
+            else
+                Fpdf::MultiCell($w[2],8,$incidencia->agente->nombre_fantasia,1,'L');
+            Fpdf::SetXY($current_x + 30, $current_y);
+            $current_y = Fpdf::GetY();
+            $current_x = Fpdf::GetX();
+            $descripcion = $incidencia->apertura->incidente->descripcion.' -'.$incidencia->apertura->descripcion;
+            if (strlen($descripcion) > 35)
+                Fpdf::MultiCell($w[3],4,$descripcion,1,'L');
+            else
+                Fpdf::MultiCell($w[3],8,$descripcion,1,'L');
+            Fpdf::SetXY($current_x + 30, $current_y);
+            Fpdf::Cell($w[4],8,$incidencia->mtcn,1,0,'C');
+            $current_y = Fpdf::GetY();
+            $current_x = Fpdf::GetX();
+            if (strlen($incidencia->beneficiario) > 25)
+                Fpdf::MultiCell($w[5],4,$incidencia->beneficiario,1,'L');
+            else
+                Fpdf::MultiCell($w[5],8,$incidencia->beneficiario,1,'L');
+            Fpdf::SetXY($current_x + 25, $current_y);
+            $current_y = Fpdf::GetY();
+            $current_x = Fpdf::GetX();
+            if (strlen($incidencia->destino) > 25)
+                Fpdf::MultiCell($w[6],4,$incidencia->destino,1,'L');
+            else
+                Fpdf::MultiCell($w[6],8,$incidencia->destino,1,'L');
+            Fpdf::SetXY($current_x + 25, $current_y);
+            Fpdf::Cell($w[7],8,$incidencia->monto,1,0,'C');
+            $current_y = Fpdf::GetY();
+            $current_x = Fpdf::GetX();
+            if (strlen($incidencia->operador->nombre_apellido) > 20) {
+                Fpdf::MultiCell($w[8],4,$incidencia->operador->nombre_apellido,1,'L');
+                Fpdf::SetXY($current_x - 190, $current_y + 4);
+            }
+            else {
+                Fpdf::MultiCell($w[8],8,$incidencia->operador->nombre_apellido,1,'L');
+                Fpdf::SetXY($current_x - 190, $current_y);
+            }
             Fpdf::Ln();
         }
 
