@@ -8,9 +8,11 @@
 	<!-- Bootstrap 3.3.4 -->
     {{ HTML::style('bootstrap/css/bootstrap.min.css') }}
     <!-- Font Awesome Icons -->    
-    {{ HTML::style('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') }}
+    <!-- {{ HTML::style('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') }}--> 
+    {{ HTML::style('dist/css/font/css/font-awesome.min.css') }}
     <!-- Ionicons -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <!--<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />--> 
+    {{ HTML::style('plugins/ionicons/ionicons.min.css') }}
     <!-- Theme style -->    
     {{ HTML::style('dist/css/styles-operador.css') }}
     <!-- AdminLTE Skins -->    
@@ -37,9 +39,10 @@
     {{ HTML::script('plugins/datatables/jquery.dataTables.min.js') }}
     {{ HTML::script('plugins/datatables/dataTables.bootstrap.min.js') }}
 	<!-- CKEditor -->	
-    {{ HTML::script('//cdn.ckeditor.com/4.4.7/basic/ckeditor.js') }}
-	<!-- Date Range -->	
-    {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') }}
+    <!--{{ HTML::script('//cdn.ckeditor.com/4.4.7/basic/ckeditor.js') }}-->
+	{{ HTML::script('plugins/ckeditor/ckeditor.js') }}
+    <!-- Date Range -->	
+    {{ HTML::script('plugins/moment/moment.min.js') }}
     {{ HTML::script('plugins/daterangepicker/daterangepicker.js') }}
 	<!-- Validator-->
     {{ HTML::script('plugins/validator/gen_validatorv4.js') }}        
